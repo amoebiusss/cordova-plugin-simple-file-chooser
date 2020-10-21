@@ -1,5 +1,11 @@
 module.exports = {
     getFile: function (accept, successCallback, failureCallback) {
+        if (typeof accept === 'function') {
+			failureCallback = successCallback;
+			successCallback = accept;
+			accept = undefined;
+		}
+        
         var result = new Promise(function (resolve, reject) {
             cordova.exec(
                 function (json) {
